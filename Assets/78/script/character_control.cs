@@ -12,6 +12,7 @@ public class character_control : MonoBehaviour
     public float RBoundary;
     public float UBoundary;
     public float DBoundary;
+    public Animator ani;
     void Start()
     {
         CharacterRigidbody = GetComponent<Rigidbody2D>();
@@ -27,20 +28,40 @@ public class character_control : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 CharacterRigidbody.velocity=new Vector3(1f, 0, 0);
+                ani.SetBool("right", true);
             }
-           
+            else
+            {
+                ani.SetBool("right", false);
+
+            }
+
             if (Input.GetKey(KeyCode.A))
             {
                 CharacterRigidbody.velocity = new Vector3(-1f, 0, 0);
+                ani.SetBool("left", true);
             }
+            else
+            {
+                ani.SetBool("left", false);
+            }
+        
             if (Input.GetKey(KeyCode.W))
             {
                 CharacterRigidbody.velocity = new Vector3(0, 1f, 0);
+            
+                ani.SetBool("back", true);
+            }
+            else
+            {
+                ani.SetBool("back", false);
             }
             if (Input.GetKey(KeyCode.S))
             {
                 CharacterRigidbody.velocity = new Vector3(0,-1f, 0);
+                
             }
+
             if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.W))
             {
                 CharacterRigidbody.velocity = new Vector3(1f, 1f, 0);
@@ -51,11 +72,11 @@ public class character_control : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
             {
-                CharacterRigidbody.velocity = new Vector3(-1f, -1f, 0);
+                CharacterRigidbody.velocity = new Vector3(-1f, 1f, 0);
             }
             if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
             {
-                CharacterRigidbody.velocity = new Vector3(-1f, 1f, 0);
+                CharacterRigidbody.velocity = new Vector3(-1f, -1f, 0);
             }
             CharacterRigidbody.velocity = CharacterSpeed * CharacterRigidbody.velocity.normalized;
         }
